@@ -132,8 +132,14 @@ a{color:inherit}
 .pix__cab{display:flex;align-items:center;gap:.7rem}
 .pix__cab b{font-weight:600}
 .pix__chave{display:flex;align-items:center;gap:.6rem;margin-top:.8rem;padding:.65rem .75rem;border-radius:12px;background:var(--creme);font:500 .95rem/1.2 var(--sans);letter-spacing:.02em;word-break:break-all}
-.pix__copiar{margin-left:auto;flex:none;padding:.5rem .85rem;border-radius:999px;border:0;background:var(--tinta);color:var(--creme);font:500 .78rem var(--sans);cursor:pointer}
+.pix__copiar{margin-left:auto;flex:none;display:inline-flex;align-items:center;gap:.35rem;min-height:40px;padding:.5rem .95rem;border-radius:999px;border:0;background:var(--tinta);color:var(--creme);font:500 .8rem var(--sans);cursor:pointer;transition:background .25s ease,transform .2s ease}
+.pix__copiar .i{width:15px;height:15px}
+.pix__copiar:active{transform:scale(.95)}
+.pix__copiar.copiou{background:var(--ouro-escuro)}
+.pix__tipo{display:block;font-size:.74rem;color:var(--tinta-suave)}
 .pix__titular{margin:.55rem 0 0;font-size:.76rem;color:var(--tinta-suave)}
+.pix__titular b{color:var(--tinta);font-weight:600}
+.js .pix{animation:sobe .7s var(--suave) .7s both}
 
 /* ---------- galeria ---------- */
 .titulo{display:flex;align-items:center;gap:.7rem;margin:30px 0 12px;font:400 1.15rem/1.2 var(--serif);letter-spacing:.04em;color:var(--tinta)}
@@ -189,7 +195,8 @@ a{color:inherit}
   <symbol id="i-relogio" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></symbol>
   <symbol id="i-escudo" viewBox="0 0 24 24"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></symbol>
   <symbol id="i-brilho" viewBox="0 0 24 24"><path d="M11.017 2.814a1 1 0 0 1 1.966 0l1.051 5.558a2 2 0 0 0 1.594 1.594l5.558 1.051a1 1 0 0 1 0 1.966l-5.558 1.051a2 2 0 0 0-1.594 1.594l-1.051 5.558a1 1 0 0 1-1.966 0l-1.051-5.558a2 2 0 0 0-1.594-1.594l-5.558-1.051a1 1 0 0 1 0-1.966l5.558-1.051a2 2 0 0 0 1.594-1.594z"/></symbol>
-  <symbol id="i-pix" viewBox="0 0 24 24"><path d="M5.3 8.4 9.2 4.5a4 4 0 0 1 5.6 0l3.9 3.9"/><path d="m18.7 15.6-3.9 3.9a4 4 0 0 1-5.6 0l-3.9-3.9"/><path d="M3 12h3l3-3 6 6 3-3h3"/></symbol>
+  <symbol id="i-carteira" viewBox="0 0 24 24"><path d="M19 7V4a1 1 0 0 0-1-1H5a2 2 0 0 0 0 4h15a1 1 0 0 1 1 1v4h-3a2 2 0 0 0 0 4h3a1 1 0 0 0 1-1v-2a1 1 0 0 0-1-1"/><path d="M3 5v14a2 2 0 0 0 2 2h15a1 1 0 0 0 1-1v-4"/></symbol>
+  <symbol id="i-copiar" viewBox="0 0 24 24"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></symbol>
 </svg>
 
 <main class="coluna">
@@ -240,18 +247,16 @@ a{color:inherit}
     </a></li>
   </ul>
 
-  <!-- ===== PIX: AGUARDANDO A CHAVE CERTA =====
-       A chave recebida em 14/10/2026 ("496697160001-56", formato de CNPJ) tem os
-       digitos verificadores INVALIDOS e a Receita nao acha esse CNPJ. Chave errada
-       aqui = cliente que nao consegue pagar. Entra quando a Joyce confirmar a chave
-       copiando do app do banco. O bloco abaixo ja esta pronto: e so tirar do
-       comentario e trocar CHAVE e TITULAR.
-  <div class="pix" style="--o:5">
-    <div class="pix__cab"><span class="link__ico"><svg class="i" aria-hidden="true"><use href="#i-pix"/></svg></span><div><b>Pagar com Pix</b></div></div>
-    <div class="pix__chave"><span data-pix>CHAVE</span><button class="pix__copiar" type="button" data-copiar>Copiar</button></div>
-    <p class="pix__titular">Em nome de TITULAR. Confira o nome antes de confirmar.</p>
+  <!-- ===== PIX =====
+       Chave CNPJ 49.679.716/0001-56, corrigida pelo Marcelo em 14/10/2026 (a primeira,
+       49.669..., tinha digitos invalidos). Conferida: digitos validos e, na Receita
+       (BrasilAPI), "49.679.716 JOYCE SOUZA FERREIRA", MEI ativo em Itabira, atividade
+       de manicure e pedicure. O botao copia SO os 14 digitos, que todo banco aceita. -->
+  <div class="pix">
+    <div class="pix__cab"><span class="link__ico"><svg class="i" aria-hidden="true"><use href="#i-carteira"/></svg></span><div><b>Pagar com Pix</b><small class="pix__tipo">Chave CNPJ</small></div></div>
+    <div class="pix__chave"><span data-pix="49679716000156">49.679.716/0001-56</span><button class="pix__copiar" type="button" data-copiar><svg class="i" aria-hidden="true"><use href="#i-copiar"/></svg>Copiar</button></div>
+    <p class="pix__titular">Em nome de <b>Joyce Souza Ferreira</b>. Confira o nome antes de confirmar.</p>
   </div>
-  -->
 
   <h2 class="titulo">Trabalhos e studio</h2>
   <ul class="galeria" aria-label="Fotos de unhas feitas no studio e do espaço">
@@ -315,16 +320,29 @@ a{color:inherit}
     if (e.target.closest(".topo, .link, .pix__copiar")) faiscas(e.clientX, e.clientY);
   });
 
-  /* pix: copiar a chave (o bloco so entra quando a chave for confirmada) */
+  /* pix: copia so os digitos (data-pix); a tela mostra a chave formatada */
   var aviso = document.querySelector("[data-aviso]"), tAviso;
-  function avisa(txt){ aviso.textContent = txt; aviso.classList.add("on"); clearTimeout(tAviso); tAviso = setTimeout(function(){ aviso.classList.remove("on"); }, 2200); }
+  function avisa(txt){ aviso.textContent = txt; aviso.classList.add("on"); clearTimeout(tAviso); tAviso = setTimeout(function(){ aviso.classList.remove("on"); }, 2400); }
   var copiar = document.querySelector("[data-copiar]");
-  if (copiar) copiar.addEventListener("click", function(){
-    var chave = document.querySelector("[data-pix]").textContent.trim();
-    var ok = function(){ avisa("Chave Pix copiada ✓"); copiar.textContent = "Copiada"; setTimeout(function(){ copiar.textContent = "Copiar"; }, 2200); };
-    if (navigator.clipboard) navigator.clipboard.writeText(chave).then(ok, function(){ avisa("Copie a chave: " + chave); });
-    else avisa("Copie a chave: " + chave);
-  });
+  if (copiar) {
+    var rotulo = copiar.innerHTML;
+    copiar.addEventListener("click", function(){
+      var chave = document.querySelector("[data-pix]").getAttribute("data-pix");
+      var ok = function(){
+        avisa("Chave Pix copiada ✓");
+        copiar.classList.add("copiou"); copiar.textContent = "Copiada ✓";
+        setTimeout(function(){ copiar.classList.remove("copiou"); copiar.innerHTML = rotulo; }, 2400);
+      };
+      /* sem clipboard (http, navegador antigo): seleciona a chave pra copiar na mao */
+      var mao = function(){
+        var sel = window.getSelection(), r = document.createRange();
+        r.selectNodeContents(document.querySelector("[data-pix]")); sel.removeAllRanges(); sel.addRange(r);
+        avisa("Chave selecionada: segure pra copiar");
+      };
+      if (navigator.clipboard && window.isSecureContext) navigator.clipboard.writeText(chave).then(ok, mao);
+      else mao();
+    });
+  }
 })();
 </script>
 
