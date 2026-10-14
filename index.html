@@ -114,6 +114,9 @@ a{color:inherit}
 .link__ico .i{width:22px;height:22px}
 .link__txt b{display:block;font:500 1rem/1.25 var(--sans);color:var(--tinta)}
 .link__txt small{display:block;margin-top:.15rem;font-size:.78rem;line-height:1.35;color:var(--tinta-suave)}
+/* uma linha so: subtitulo que quebra deixa um botao mais alto que os outros */
+.link__txt{min-width:0}
+.link:not(.link--avaliar) .link__txt small{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .link__seta{width:18px;height:18px;color:var(--ouro);transition:transform .3s var(--suave)}
 .link:hover .link__seta{transform:translateX(3px)}
 /* o principal: dourado */
@@ -268,7 +271,7 @@ a{color:inherit}
     <!-- o link que ela usa na bio, com o rastreio do Instagram (utm), passado pelo Marcelo -->
     <li style="--o:1"><a class="link link--ouro" href="https://online.maapp.com.br/Agendamentostudiojoyceferreiranail?utm_source=ig&amp;utm_medium=social&amp;utm_content=link_in_bio" target="_blank" rel="noopener">
       <span class="link__ico"><svg class="i" aria-hidden="true"><use href="#i-cal"/></svg></span>
-      <span class="link__txt"><b>Agendar meu horário</b><small>Escolha o serviço, o dia e a hora</small></span>
+      <span class="link__txt"><b>Agendar meu horário</b><small>Escolha serviço, dia e hora</small></span>
       <svg class="i link__seta" aria-hidden="true"><use href="#i-dir"/></svg>
     </a></li>
     <li style="--o:2"><a class="link" href="https://wa.me/5531991419049?text=Ol%C3%A1%2C%20Joyce!%20Vim%20pelo%20seu%20link%20e%20quero%20tirar%20uma%20d%C3%BAvida." target="_blank" rel="noopener">
@@ -278,12 +281,12 @@ a{color:inherit}
     </a></li>
     <li style="--o:3"><a class="link" href="https://www.instagram.com/joyceferreira.nail/" target="_blank" rel="noopener">
       <span class="link__ico link__ico--insta"><svg class="i" aria-hidden="true"><use href="#i-insta"/></svg></span>
-      <span class="link__txt"><b>Instagram</b><small>@joyceferreira.nail · trabalhos e novidades</small></span>
+      <span class="link__txt"><b>Instagram</b><small>@joyceferreira.nail</small></span>
       <svg class="i link__seta" aria-hidden="true"><use href="#i-dir"/></svg>
     </a></li>
     <li style="--o:4"><a class="link" href="https://maps.google.com/?cid=7714130620939301534" target="_blank" rel="noopener">
       <span class="link__ico link__ico--maps"><svg class="i" aria-hidden="true"><use href="#i-maps"/></svg></span>
-      <span class="link__txt"><b>Como chegar</b><small>Av. Pref. Li Guerra, Praia · Itabira</small></span>
+      <span class="link__txt"><b>Como chegar</b><small>Av. Pref. Li Guerra · Praia</small></span>
       <svg class="i link__seta" aria-hidden="true"><use href="#i-dir"/></svg>
     </a></li>
   </ul>
