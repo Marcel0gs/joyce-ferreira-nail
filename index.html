@@ -123,6 +123,32 @@ a{color:inherit}
 .link--ouro .link__txt small{color:#4A3916}
 .link--ouro .link__seta{color:#3A2C12}
 .link--ouro:hover{border-color:transparent;box-shadow:0 18px 40px rgba(169,122,43,.45)}
+
+/* avaliar: o destaque da pagina. Borda dourada em degrade, estrelas do Google e um
+   brilho que passa sozinho de tempos em tempos */
+.link--avaliar{
+  padding:1rem 1rem 1rem .85rem;border:2px solid transparent;
+  background:linear-gradient(var(--papel),var(--papel)) padding-box,linear-gradient(135deg,#E2BE62,#B8862E 45%,#F0D891 70%,#C79A43) border-box;
+  box-shadow:0 14px 34px rgba(169,122,43,.22);
+}
+.link--avaliar:hover{border-color:transparent;box-shadow:0 18px 40px rgba(169,122,43,.32)}
+.link--avaliar::before{animation:passa 4.5s ease-in-out 1.4s infinite}
+@keyframes passa{0%{left:-60%}28%,100%{left:130%}}
+.link--avaliar{grid-template-columns:52px 1fr 18px}
+.link--avaliar .link__ico{width:52px;height:52px;border-radius:16px}
+.link--avaliar .link__ico .i{width:28px;height:28px}
+.link--avaliar .link__txt b{font-weight:600;font-size:1.08rem}
+.estrelas{display:flex;gap:2px;margin-bottom:.2rem}
+.estrelas .i{width:14px;height:14px;fill:#FBBC04;stroke:#FBBC04;stroke-width:1}
+
+/* marcas com as cores oficiais */
+.link__ico--google,.link__ico--maps{background:var(--papel);border:1px solid var(--linha)}
+.link__ico--google .i{width:24px;height:24px}
+.link__ico--maps .i{width:26px;height:26px}
+.link__ico--zap{background:#25D366;color:#fff}
+.link__ico--zap .i{width:25px;height:25px}
+.link__ico--insta{background:radial-gradient(circle at 30% 107%,#FDF497 0%,#FDF497 5%,#FD5949 45%,#D6249F 60%,#285AEB 90%);color:#fff}
+.link__ico--insta .i{stroke-width:2}
 /* entrada em cascata, so com JS e sem "reduzir movimento" */
 .js .links > li{animation:sobe .7s var(--suave) both;animation-delay:calc(var(--o,0) * 70ms + .35s)}
 @keyframes sobe{from{opacity:0;transform:translateY(14px)}}
@@ -144,11 +170,14 @@ a{color:inherit}
 /* ---------- galeria ---------- */
 .titulo{display:flex;align-items:center;gap:.7rem;margin:30px 0 12px;font:400 1.15rem/1.2 var(--serif);letter-spacing:.04em;color:var(--tinta)}
 .titulo::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,var(--ouro-claro),transparent)}
-.galeria{display:flex;gap:10px;overflow-x:auto;scroll-snap-type:x mandatory;margin:0 -16px;padding:2px 16px 8px;scrollbar-width:none;list-style:none}
+.galeria{display:flex;gap:10px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding-inline:16px;margin:0 -16px;padding:2px 16px 8px;scrollbar-width:none;list-style:none}
 .galeria::-webkit-scrollbar{display:none}
 .galeria li{flex:0 0 46%;scroll-snap-align:start}
-.galeria img{width:100%;aspect-ratio:1;object-fit:cover;border-radius:16px;box-shadow:0 8px 18px rgba(60,45,20,.12)}
-@media (min-width:620px){.galeria{margin:0 -20px;padding:2px 20px 8px}}
+.galeria img{width:100%;aspect-ratio:1;object-fit:cover;border-radius:16px;box-shadow:0 8px 18px rgba(60,45,20,.12);-webkit-user-drag:none;user-select:none}
+@media (hover:hover) and (pointer:fine){.galeria{cursor:grab}}
+/* o snap desliga enquanto o mouse arrasta, senao cada pixel puxa de volta pra foto */
+.galeria.arrastando{scroll-snap-type:none;cursor:grabbing}
+@media (min-width:620px){.galeria{margin:0 -20px;padding:2px 20px 8px;scroll-padding-inline:20px}}
 
 /* ---------- informacoes ---------- */
 .info{display:grid;gap:10px}
@@ -162,6 +191,9 @@ a{color:inherit}
 .horas .hoje{color:var(--ouro-texto);font-weight:600}
 
 .rodape{margin-top:26px;text-align:center;font-size:.72rem;letter-spacing:.06em;color:var(--tinta-suave)}
+.assinatura{margin:.6rem 0 0;text-align:center;font-size:.7rem;letter-spacing:.04em;color:var(--tinta-suave)}
+.assinatura a{color:var(--ouro-texto);font-weight:600;text-decoration:none;border-bottom:1px solid var(--ouro-claro);padding-bottom:1px;transition:color .2s ease}
+.assinatura a:hover{color:var(--tinta)}
 
 .i{width:24px;height:24px;flex:none;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
 
@@ -178,6 +210,7 @@ a{color:inherit}
   .js .links > li,.js .logo__brilho{animation:none}
   .faisca{display:none}
   .link,.link::before,.link__seta{transition:none}
+  .link--avaliar::before{animation:none}
 }
 </style>
 </head>
@@ -191,6 +224,10 @@ a{color:inherit}
   <symbol id="i-insta" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1.1" fill="currentColor" stroke="none"/></symbol>
   <symbol id="i-pin" viewBox="0 0 24 24"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></symbol>
   <symbol id="i-estrela" viewBox="0 0 24 24"><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"/></symbol>
+  <!-- logos de marca com as cores oficiais (Wikimedia Commons). stroke="none" pra o
+       traco do .i nao contornar as cores -->
+  <symbol id="i-google" viewBox="1 1 22 22"><g stroke="none"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></g></symbol>
+  <symbol id="i-maps" viewBox="0 0 92.3 132.3"><g stroke="none"><path fill="#1a73e8" d="M60.2 2.2C55.8.8 51 0 46.1 0 32 0 19.3 6.4 10.8 16.5l21.8 18.3L60.2 2.2z"/><path fill="#ea4335" d="M10.8 16.5C4.1 24.5 0 34.9 0 46.1c0 8.7 1.7 15.7 4.6 22l28-33.3-21.8-18.3z"/><path fill="#4285f4" d="M46.2 28.5c9.8 0 17.7 7.9 17.7 17.7 0 4.3-1.6 8.3-4.2 11.4 0 0 13.9-16.6 27.5-32.7-5.6-10.8-15.3-19-27-22.7L32.6 34.8c3.3-3.8 8.1-6.3 13.6-6.3"/><path fill="#fbbc04" d="M46.2 63.8c-9.8 0-17.7-7.9-17.7-17.7 0-4.3 1.5-8.3 4.1-11.3l-28 33.3c4.8 10.6 12.8 19.2 21 29.9l34.1-40.5c-3.3 3.9-8.1 6.3-13.5 6.3"/><path fill="#34a853" d="M59.1 109.2c15.4-24.1 33.3-35 33.3-63 0-7.7-1.9-14.9-5.2-21.3L25.6 98c2.6 3.4 5.3 7.3 7.9 11.3 9.4 14.5 6.8 23.1 12.8 23.1s3.4-8.7 12.8-23.2"/></g></symbol>
   <symbol id="i-dir" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></symbol>
   <symbol id="i-relogio" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></symbol>
   <symbol id="i-escudo" viewBox="0 0 24 24"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></symbol>
@@ -218,31 +255,35 @@ a{color:inherit}
   <!-- ⚠ WhatsApp: (31) 99141-9049, o da vitrine e o da agenda online dela.
        A ficha do Google diz 99141-9094 (digitos trocados): avisar a Joyce. -->
   <ul class="links">
+    <!-- em primeiro e em destaque, pedido do Marcelo. Abre direto a janela de avaliacao
+         do Google (#lrd = id da ficha, ",3" = escrever) -->
+    <li style="--o:0"><a class="link link--avaliar" href="https://www.google.com/search?q=Joyce+Ferreira+nail+Itabira&hl=pt-BR#lrd=0xa5a1007880c917:0x6b0e18edb40cf29e,3,,," target="_blank" rel="noopener">
+      <span class="link__ico link__ico--google"><svg class="i" aria-hidden="true"><use href="#i-google"/></svg></span>
+      <span class="link__txt">
+        <span class="estrelas" aria-hidden="true"><svg class="i"><use href="#i-estrela"/></svg><svg class="i"><use href="#i-estrela"/></svg><svg class="i"><use href="#i-estrela"/></svg><svg class="i"><use href="#i-estrela"/></svg><svg class="i"><use href="#i-estrela"/></svg></span>
+        <b>Avaliar no Google</b><small>Leva 1 minuto e ajuda muito o studio</small>
+      </span>
+      <svg class="i link__seta" aria-hidden="true"><use href="#i-dir"/></svg>
+    </a></li>
     <!-- o link que ela usa na bio, com o rastreio do Instagram (utm), passado pelo Marcelo -->
-    <li style="--o:0"><a class="link link--ouro" href="https://online.maapp.com.br/Agendamentostudiojoyceferreiranail?utm_source=ig&amp;utm_medium=social&amp;utm_content=link_in_bio" target="_blank" rel="noopener">
+    <li style="--o:1"><a class="link link--ouro" href="https://online.maapp.com.br/Agendamentostudiojoyceferreiranail?utm_source=ig&amp;utm_medium=social&amp;utm_content=link_in_bio" target="_blank" rel="noopener">
       <span class="link__ico"><svg class="i" aria-hidden="true"><use href="#i-cal"/></svg></span>
       <span class="link__txt"><b>Agendar meu horário</b><small>Escolha o serviço, o dia e a hora</small></span>
       <svg class="i link__seta" aria-hidden="true"><use href="#i-dir"/></svg>
     </a></li>
-    <li style="--o:1"><a class="link" href="https://wa.me/5531991419049?text=Ol%C3%A1%2C%20Joyce!%20Vim%20pelo%20seu%20link%20e%20quero%20tirar%20uma%20d%C3%BAvida." target="_blank" rel="noopener">
-      <span class="link__ico"><svg class="i" aria-hidden="true"><use href="#i-zap"/></svg></span>
+    <li style="--o:2"><a class="link" href="https://wa.me/5531991419049?text=Ol%C3%A1%2C%20Joyce!%20Vim%20pelo%20seu%20link%20e%20quero%20tirar%20uma%20d%C3%BAvida." target="_blank" rel="noopener">
+      <span class="link__ico link__ico--zap"><svg class="i" aria-hidden="true"><use href="#i-zap"/></svg></span>
       <span class="link__txt"><b>Falar no WhatsApp</b><small>(31) 99141-9049</small></span>
       <svg class="i link__seta" aria-hidden="true"><use href="#i-dir"/></svg>
     </a></li>
-    <li style="--o:2"><a class="link" href="https://www.instagram.com/joyceferreira.nail/" target="_blank" rel="noopener">
-      <span class="link__ico"><svg class="i" aria-hidden="true"><use href="#i-insta"/></svg></span>
+    <li style="--o:3"><a class="link" href="https://www.instagram.com/joyceferreira.nail/" target="_blank" rel="noopener">
+      <span class="link__ico link__ico--insta"><svg class="i" aria-hidden="true"><use href="#i-insta"/></svg></span>
       <span class="link__txt"><b>Instagram</b><small>@joyceferreira.nail · trabalhos e novidades</small></span>
       <svg class="i link__seta" aria-hidden="true"><use href="#i-dir"/></svg>
     </a></li>
-    <li style="--o:3"><a class="link" href="https://maps.google.com/?cid=7714130620939301534" target="_blank" rel="noopener">
-      <span class="link__ico"><svg class="i" aria-hidden="true"><use href="#i-pin"/></svg></span>
+    <li style="--o:4"><a class="link" href="https://maps.google.com/?cid=7714130620939301534" target="_blank" rel="noopener">
+      <span class="link__ico link__ico--maps"><svg class="i" aria-hidden="true"><use href="#i-maps"/></svg></span>
       <span class="link__txt"><b>Como chegar</b><small>Av. Pref. Li Guerra, Praia · Itabira</small></span>
-      <svg class="i link__seta" aria-hidden="true"><use href="#i-dir"/></svg>
-    </a></li>
-    <!-- abre direto a janela de avaliacao do Google (#lrd = id da ficha, ",3" = escrever) -->
-    <li style="--o:4"><a class="link" href="https://www.google.com/search?q=Joyce+Ferreira+nail+Itabira&hl=pt-BR#lrd=0xa5a1007880c917:0x6b0e18edb40cf29e,3,,," target="_blank" rel="noopener">
-      <span class="link__ico"><svg class="i" aria-hidden="true"><use href="#i-estrela"/></svg></span>
-      <span class="link__txt"><b>Avaliar no Google</b><small>Sua avaliação ajuda muito o studio</small></span>
       <svg class="i link__seta" aria-hidden="true"><use href="#i-dir"/></svg>
     </a></li>
   </ul>
@@ -261,11 +302,12 @@ a{color:inherit}
   <h2 class="titulo">Trabalhos e studio</h2>
   <ul class="galeria" aria-label="Fotos de unhas feitas no studio e do espaço">
     <li><img src="assets/img/unha-4.webp" width="600" height="600" decoding="async" alt="Unhas nude com contorno preto, em frente ao logo dourado na parede do studio"></li>
-    <li><img src="assets/img/unha-2.webp" width="600" height="600" decoding="async" alt="Unhas curtas com esmaltação perolada"></li>
-    <li><img src="assets/img/unha-3.webp" width="600" height="600" decoding="async" alt="Unhas verde-escuro, mãos em frente a quadros de folhas"></li>
+    <!-- fotos do studio em 2o e 3o, pedido do Marcelo -->
+    <li><img src="assets/img/studio-esmaltes.webp" width="600" height="600" decoding="async" alt="Parede de esmaltes e luminária dourada do studio"></li>
+    <li><img src="assets/img/studio-mesa.webp" width="600" height="600" decoding="async" alt="Bancada de atendimento com apoio de mão e um café"></li>
+    <li><img src="assets/img/unha-2.webp" width="600" height="600" loading="lazy" decoding="async" alt="Unhas curtas com esmaltação perolada"></li>
+    <li><img src="assets/img/unha-3.webp" width="600" height="600" loading="lazy" decoding="async" alt="Unhas verde-escuro, mãos em frente a quadros de folhas"></li>
     <li><img src="assets/img/unha-1.webp" width="600" height="600" loading="lazy" decoding="async" alt="Unhas pretas brilhantes"></li>
-    <li><img src="assets/img/studio-esmaltes.webp" width="600" height="600" loading="lazy" decoding="async" alt="Parede de esmaltes e luminária dourada do studio"></li>
-    <li><img src="assets/img/studio-mesa.webp" width="600" height="600" loading="lazy" decoding="async" alt="Bancada de atendimento com apoio de mão e um café"></li>
   </ul>
 
   <h2 class="titulo">Bom saber</h2>
@@ -286,6 +328,8 @@ a{color:inherit}
   </div>
 
   <p class="rodape">Studio Joyce Ferreira Nail · Itabira/MG</p>
+  <!-- assinatura nossa, em todo site entregue (templates/componentes/assinatura-rodape.html) -->
+  <p class="assinatura">Desenvolvido por <a href="https://marcel0gs.github.io/marcelo-ribeiro-digital/" target="_blank" rel="noopener">Marcelo Ribeiro</a></p>
 </main>
 
 <div class="aviso" role="status" aria-live="polite" data-aviso></div>
@@ -319,6 +363,45 @@ a{color:inherit}
   document.addEventListener("pointerdown", function(e){
     if (e.target.closest(".topo, .link, .pix__copiar")) faiscas(e.clientX, e.clientY);
   });
+
+  /* galeria: o dedo e o trackpad ja rolam; o mouse precisa do arraste */
+  var gal = document.querySelector(".galeria");
+  if (gal) {
+    var arr = null, tSolta;
+    gal.addEventListener("dragstart", function(e){ e.preventDefault(); });
+    gal.addEventListener("pointerdown", function(e){
+      if (e.pointerType !== "mouse" || e.button !== 0) return;
+      clearTimeout(tSolta);
+      arr = { x: e.clientX, s: gal.scrollLeft, moveu: false };
+      gal.setPointerCapture(e.pointerId);
+    });
+    gal.addEventListener("pointermove", function(e){
+      if (!arr) return;
+      var dx = e.clientX - arr.x;
+      if (!arr.moveu) { if (Math.abs(dx) < 4) return; arr.moveu = true; gal.classList.add("arrastando"); }
+      gal.scrollLeft = arr.s - dx;
+    });
+    var solta = function(e){
+      if (!arr) return;
+      var moveu = arr.moveu, dir = arr.s - gal.scrollLeft < 0 ? 1 : -1; arr = null;
+      if (!moveu) { gal.classList.remove("arrastando"); return; } /* clique parado no meio da animacao */
+      /* para na foto mais perto, puxada um quarto pro lado do arraste */
+      var base = gal.getBoundingClientRect().left + parseFloat(getComputedStyle(gal).scrollPaddingLeft || 0);
+      var max = gal.scrollWidth - gal.clientWidth, alvo = gal.scrollLeft, mira = gal.scrollLeft + dir * gal.firstElementChild.offsetWidth * .25, melhor = Infinity;
+      Array.prototype.forEach.call(gal.children, function(li){
+        var p = Math.min(max, Math.max(0, gal.scrollLeft + li.getBoundingClientRect().left - base));
+        if (Math.abs(p - mira) < melhor) { melhor = Math.abs(p - mira); alvo = p; }
+      });
+      gal.scrollTo({ left: alvo, behavior: reduzido ? "auto" : "smooth" });
+      /* se a rolagem suave nao chegou (aba em segundo plano, aparelho lento), encaixa direto */
+      var fim = function(e){
+        if (e && Math.abs(gal.scrollLeft - alvo) > 2) return; /* scrollend atrasado do proprio arraste */
+        clearTimeout(tSolta); gal.removeEventListener("scrollend", fim); if (Math.abs(gal.scrollLeft - alvo) > 2) gal.scrollLeft = alvo; gal.classList.remove("arrastando"); };
+      gal.addEventListener("scrollend", fim); tSolta = setTimeout(fim, 900);
+    };
+    gal.addEventListener("pointerup", solta);
+    gal.addEventListener("pointercancel", solta);
+  }
 
   /* pix: copia so os digitos (data-pix); a tela mostra a chave formatada */
   var aviso = document.querySelector("[data-aviso]"), tAviso;
